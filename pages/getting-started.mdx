@@ -1,0 +1,103 @@
+
+# Preparing
+
+```bash
+TIDB_CLOUD_PASSWORD={PASSWORD}
+TIDB_CLOUD_USER={USER}
+VOYAGE_API_KEY={API_KEY}
+```
+## TiDB Cloud
+We use TiDB Cloud as our database, store the code intelligence data and vector search data.
+TiDB Cloud is a fully managed TiDB service provided by PingCAP.
+
+TiDB Cloud is serverless, so you don't need to worry about the underlying infrastructure.
+
+TiDB Cloud is compatible with MySQL, so you can use it as a drop-in replacement for MySQL.
+
+TiDB Cloud also support vector search.
+
+
+
+### voyage
+we choose voyage-code-2 as Embedding Model,
+you need go to https://www.voyageai.com/ to get your own API key
+
+
+
+# Learn Concave VIDE the Hard Way
+
+> you can see the result in https://github.com/concave-ai/playground/tree/main/examples/pytest/6a3ac51ee2350d5072fdd082040e7cfa22331fc0
+
+```bash
+
+
+pip install concave
+# also you can install concave from source code
+# pip install /your/concave/path
+
+
+# use pytest as your repo
+git clone https://github.com/pytest-dev/pytest
+cd pytest
+git checkout 6a3ac51ee2350d5072fdd082040e7cfa22331fc0
+
+```
+
+## $ index_code()
+```
+python -m concave.tools.code-intelligence
+
+# you will get a index file, symbol_index.parquet
+ls -alh symbol_index.parquet
+```
+
+
+## $ Symbols_Tokens()
+
+get symbols tokens, help llm to choose the right symbol
+
+```
+python -m concave.tools.symbol_tokens
+```
+
+
+## $ Search_symbol()
+
+```
+python -m concave.tools.symbol_search --keywords EncodedFile
+```
+#### results
+```
+[
+SearchResult(id='_pytest.capture.EncodedFile', kind='class', range=[166, 0, 179, 48, 5071, 5526], file_path='src/_pytest/capture.py'),
+SearchResult(id='_pytest.capture.EncodedFile.__slots__', kind='variable', range=[167, 4, 167, 18, 5112, 5126], file_path='src/_pytest/capture.py'),
+SearchResult(id='_pytest.capture.EncodedFile.name', kind='function', range=[169, 4, 173, 32, 5132, 5337], file_path='src/_pytest/capture.py'),
+SearchResult(id='_pytest.capture.EncodedFile.mode', kind='function', range=[175, 4, 179, 48, 5343, 5526], file_path='src/_pytest/capture.py')]
+```
+
+
+### $ Semantic_Search()
+
+```
+# make sure you have voyage api key
+# also you need upload vector index to tidb cloud first
+python -m concave.tools.vector_index
+
+# search
+python -m concave.tools.semantic_search --question 'code relative EncodedFile'
+```
+
+#### results
+```
+==============================
+| VECTOR SEARCH RESULTS
+| Found 6 nodes
+==============================
+   1  | 0.7447463451196501 _pytest.capture.EncodedFile
+   2  | 0.7374515280300927 _pytest.capture.EncodedFile.__slots__
+   3  | 0.7332991997482509 _pytest.capture.EncodedFile.name
+   4  | 0.7163110117541995 _pytest.capture.EncodedFile.mode
+   5  | 0.71602193736246 _pytest.capture.DontReadFromInput.encoding
+   6  | 0.7147858906813189 _pytest.capture.CaptureIO.__init__
+
+```

@@ -1,11 +1,46 @@
-# Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+# Overview
 
-## What is Nextra?
+## What is Concave L·IDE?
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+Concave is the world’s first **simple**, **powerful**, and **flexible** IDE designed specifically for Large Language Models (LLMs).
 
-## Documentation
+## Key Features
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+- **Simple**: Concave offers a user-friendly design for ease of use.
+
+- **Powerful**: Concave delivers robust functionalities.
+  - **Workspace Management**:
+    - **Commit**: Quickly snapshot the current workspace using the Concave CLI.
+    - **Fork**: Easily restore the workspace to a specified snapshot via the Concave CLI.
+
+  - **Codebase Intelligence**:
+    - **Code Intelligence**: Supports mainstream languages through Tree-sitter/SCIP.
+
+  - **Hybrid Search**:
+    - **Full-text Search**: Search keywords within the codebase.
+    - **Symbol Search**: Locate symbols across the codebase.
+    - **Semantic Search**: Discover relevant code snippets.
+    - **History Search**: Investigate code history.
+
+  - **Plugin Support**:
+  - **Plugin System**: Customize functionalities with ease using the plugin system.
+
+- **Flexible**: Concave is adaptable and can be tailored to meet various needs.
+
+## FAQ
+
+### How does Concave differ from other IDEs?
+
+Concave is specifically designed for seamless interaction with LLMs. While IDEs like Cursor, VS Code with Copilot, and JetBrains are tailored for human users with a focus on UX, LLMs require a different approach. They don’t need fancy interfaces or features—they need simple inputs, simple outputs, and powerful functions.
+
+### Why provide an IDE instead of just tools?
+
+We believe that an IDE—a proven, efficient tool for humans—is also the most effective way for LLMs to interact with large codebases. Using Concave IDE as the workspace for LLM agents significantly improves problem identification compared to simpler frameworks based only on Python AST.
+
+In comparison with open-source projects like Moatless, Concave’s design is simpler and more efficient, making it easier for LLMs to understand and reducing hallucination rates. This leads to a 30% higher success rate in issue resolution.
+
+Unlike existing open-source autonomous software engineer frameworks (Moatless/OpenDavin/AutoCodeRover/SWE-agents), our implementation is more engineered. By choosing Tree-sitter for code intelligence, Concave can analyze 500 Python files in under a second. Our analysis goes beyond simple AST parsing, providing in-depth insights such as class inheritance and function definitions and references.
+
+> Frameworks like OpenDavin and AutoCodeRover only use Python AST for basic static analysis, combined with full-text matching for searches, which limits them to Python code and results in lower search accuracy. Concave, powered by Tree-sitter, supports multiple languages and enhances search precision with vector-based search.
+
+Concave’s search capabilities extend beyond full-text to include symbol search, semantic search, and code history search, offering a comprehensive and precise solution.
