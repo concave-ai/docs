@@ -6,7 +6,13 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/concave-ai',
   },
+
   docsRepositoryBase: 'https://github.com/concave-ai/docs',
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – Concave'
+    }
+  }
 }
 
 export default config
